@@ -1,4 +1,3 @@
-import re
 from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.home_page import HomePage
