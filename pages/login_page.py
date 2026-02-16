@@ -16,7 +16,7 @@ class LoginPage:
         
     def click_login(self):
         self.login_button.click()
-        
+
     def login(self, username: str, password: str):
         self.enter_username(username)
         self.enter_password(password)
