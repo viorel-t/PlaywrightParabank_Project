@@ -2,10 +2,12 @@
 # Test pentru endpoint-ul POST /billpay
 #
 
+import pytest
 from utils.utils_saveapi_response import save_api_response
 
 URL_BAZA = "https://parabank.parasoft.com/parabank/services/bank/billpay?accountId=13344&amount=10"
 
+@pytest.mark.api
 def test_post_billPay(playwright):
    request = playwright.request.new_context(storage_state="autentificare/storage_state.json")
    parametri = {"name": "Test Payee", 

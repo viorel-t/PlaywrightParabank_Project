@@ -2,10 +2,12 @@
 # Test pentru endpoint-ul GET /customer accounts by ID
 #
 
+import pytest
 from utils.utils_saveapi_response import save_api_response
 
 URL_BAZA = "https://parabank.parasoft.com/parabank/services/bank/customers/12212/accounts"
 
+@pytest.mark.api
 def test_get_custAccounts(playwright):
    request = playwright.request.new_context()
    raspuns = request.get(URL_BAZA, headers={"Accept": "application/xml"})

@@ -1,8 +1,10 @@
+import pytest
 from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.home_page import HomePage
 
-
+@pytest.mark.smoke
+@pytest.mark.ui
 def test_login(page: Page) -> None:
     login_page = LoginPage(page)
     home_page = HomePage(page)

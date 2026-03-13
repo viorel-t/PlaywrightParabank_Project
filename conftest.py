@@ -34,6 +34,7 @@ def auth_context(browser, saved_auth_state):
 
 @pytest.fixture
 def auth_page(auth_context):
+    # Pagina deja logata
     pagina = auth_context.new_page()
     yield pagina
     pagina.close()

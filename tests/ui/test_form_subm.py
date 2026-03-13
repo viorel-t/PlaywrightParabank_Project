@@ -1,6 +1,9 @@
+import pytest
 from playwright.sync_api import expect
 from utils.utils_screenshot import salveaza_screenshot
 
+@pytest.mark.form
+@pytest.mark.ui
 def test_form_submission(auth_page):
     # Navighez către pagina cu formularul
     auth_page.goto("billpay.htm")
