@@ -1,0 +1,8 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Verify user can submit the form successfully.","8991","Test Form Submission","tests.ui","2026-03-13","passed","2026-03-13","","test_form_subm","",""
+"Verify API bill payment.","235","Test Bill Pay API","tests.api","2026-03-13","passed","2026-03-13","","test_post_billPay","",""
+"Verify user can register successfully.","11926","Test Registration","tests.ui","2026-03-13","failed","2026-03-13","","test_registration","",""
+"Verify user can login successfully.","2436","Test Authentication","tests.ui","2026-03-13","passed","2026-03-13","","test_login","",""
+"","13399","test_example[chromium]","tests","2026-01-14","passed","2026-01-14","","test_login","",""
+"Verify API for customer account retrieval.","777","Test Customer Accounts API","tests.api","2026-03-13","passed","2026-03-13","","test_get_custAccounts","",""
+"Verify API for getting Customer Details.","228","Test Customer Details API","tests.api","2026-03-13","passed","2026-03-13","","test_get_custByID","",""

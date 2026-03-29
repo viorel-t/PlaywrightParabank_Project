@@ -1,5 +1,6 @@
 import os
 import pytest
+import allure
 from pages.login_page import LoginPage
 from pages.home_page import HomePage
 
@@ -38,3 +39,21 @@ def auth_page(auth_context):
     pagina = auth_context.new_page()
     yield pagina
     pagina.close()
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+
+    # verificăm doar dacă testul a picat
+    if rep.when == "call" and rep.failed:
+        page = item.funcargs.get("page")
+
+        if page:
+            #screenshot = page.screenshot()
+
+            allure.attach(
+                page.screenshot(),
+                name="screenshot_on_failure",
+                attachment_type=allure.attachment_type.PNG
+            )

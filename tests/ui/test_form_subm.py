@@ -1,18 +1,19 @@
 import pytest
+import allure
 from playwright.sync_api import expect
-from utils.utils_screenshot import salveaza_screenshot
 
 @pytest.mark.form
 @pytest.mark.ui
+@allure.title("Test Form Submission")
+@allure.description("Verify user can submit the form (bill payment) successfully.")
+@allure.severity("normal")
+@allure.epic("Web UI")
+@allure.feature("Form Submission")
+@allure.story("Valid bill payment form submission")
 def test_form_submission(auth_page):
     # Navighez către pagina cu formularul
     auth_page.goto("billpay.htm")
-    try:
-        # Verific daca pagina s-a incarcat corect
-        expect(auth_page.get_by_role("link", name="Log Out")).to_be_visible(timeout=5000)
-    except Exception:
-        #eroare, acces pagina fara logare
-        raise AssertionError("Form submission: nu s-a efectuat logarea.")
+    expect(auth_page.get_by_role("link", name="Log Out")).to_be_visible(timeout=5000)
 
     # Completez câmpurile formularului
     auth_page.locator("input[name=\"payee.name\"]").fill("John Doe")
@@ -29,10 +30,4 @@ def test_form_submission(auth_page):
     # Trimit formularul
     auth_page.get_by_role("button", name="Send Payment").click()
 
-    try:
-        # Verific daca mesajul de succes este afișat
-        expect(auth_page.get_by_text("Bill Payment Complete")).to_be_visible(timeout=5000)
-    except Exception:
-        #eroare trimitere formular, salvez screenshot-ul
-        path = salveaza_screenshot(auth_page, "bill_payment", "screenshots")
-        raise AssertionError("Bill Payment esuat. Screenshot salvat in: " + path)
+    expect(auth_page.get_by_text("Bill Payment Complete")).to_be_visible(timeout=5000)

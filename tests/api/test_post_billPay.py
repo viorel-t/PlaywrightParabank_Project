@@ -3,11 +3,17 @@
 #
 
 import pytest
-from utils.utils_saveapi_response import save_api_response
+import allure
 
 URL_BAZA = "https://parabank.parasoft.com/parabank/services/bank/billpay?accountId=13344&amount=10"
 
 @pytest.mark.api
+@allure.title("Test Bill Pay API")
+@allure.description("Verify API bill payment.")
+@allure.severity("normal")
+@allure.epic("API")
+@allure.feature("Bill Pay")
+@allure.story("Valid bill payment")
 def test_post_billPay(playwright):
    request = playwright.request.new_context(storage_state="autentificare/storage_state.json")
    parametri = {"name": "Test Payee", 
@@ -17,19 +23,9 @@ def test_post_billPay(playwright):
    raspuns = request.post(URL_BAZA, headers={"Content-Type": "application/json",
                                "Accept": "application/xml"}, data = parametri)
 
-   try:
-      assert raspuns.status == 200
-   except AssertionError:
-      #Daca raspunsul serverului nu e 200, salvez raspunsul intr-un fisier
-      path = save_api_response("", raspuns, "post_billpay", "html", "screenshots")
-      raise AssertionError(f"Eroare POST billPay. Raspuns salvat in: {path}")
-
+   assert raspuns.status == 200    
    xml = raspuns.text()
-
+   
    #Verific daca raspunsul contine tag-ul <billPayResult>
-   try:
-      assert "<billPayResult>" in xml
-   except AssertionError:
-      raise AssertionError(f"Raspunsul API POST billPay nu contine tag-ul <billPayResult>.")
-
+   assert "<billPayResult>" in xml
    request.dispose()

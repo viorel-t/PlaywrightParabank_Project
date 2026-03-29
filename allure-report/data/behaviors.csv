@@ -1,0 +1,8 @@
+"BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
+"0","Web UI","0","Form Submission","1","0","Valid form submission","0"
+"0","API","0","Bill Pay","1","0","Valid bill payment","0"
+"0","Web UI","1","Registration","0","0","Valid registration","0"
+"0","Web UI","0","Login","1","0","Valid login","0"
+"0","","0","","1","0","","0"
+"0","API","0","Customer Accounts","1","0","Valid customer accounts retrieval","0"
+"0","API","0","Customer Details","1","0","Valid customer details retrieval","0"

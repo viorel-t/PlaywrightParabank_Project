@@ -1,4 +1,0 @@
-URL: https://parabank.parasoft.com/parabank/services/bank/customers/12/accounts
-Status: 400
-
-Response: Could not find customer #12

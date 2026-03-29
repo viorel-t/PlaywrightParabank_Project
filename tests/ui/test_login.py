@@ -1,10 +1,17 @@
 import pytest
+import allure
 from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.home_page import HomePage
 
 @pytest.mark.smoke
 @pytest.mark.ui
+@allure.title("Test Authentication")
+@allure.description("Verify user can login successfully.")
+@allure.severity("critical")
+@allure.epic("Web UI")
+@allure.feature("Login")
+@allure.story("Valid login")
 def test_login(page: Page) -> None:
     login_page = LoginPage(page)
     home_page = HomePage(page)
