@@ -1,2 +1,2 @@
 # PlaywrightParabank_Project
-Playwright project with Parabank
+Testing Parabank application with Playwright and Pytest.
