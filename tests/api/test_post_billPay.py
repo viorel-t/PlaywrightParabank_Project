@@ -4,8 +4,9 @@
 
 import pytest
 import allure
+from config import URL_BAZA_API
 
-URL_BAZA = "https://parabank.parasoft.com/parabank/services/bank/billpay?accountId=13344&amount=10"
+URL_POST = URL_BAZA_API + "billpay?accountId=13344&amount=10"
 
 @pytest.mark.api
 @allure.title("Test Bill Pay API")
@@ -20,7 +21,7 @@ def test_post_billPay(playwright):
                 "address":{"street": "string", "city": "string", "state": "string", "zipCode": "string"}, 
                 "phoneNumber": "string"}
 
-   raspuns = request.post(URL_BAZA, headers={"Content-Type": "application/json",
+   raspuns = request.post(URL_POST, headers={"Content-Type": "application/json",
                                "Accept": "application/xml"}, data = parametri)
 
    assert raspuns.status == 200    

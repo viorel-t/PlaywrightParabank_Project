@@ -1,33 +1,31 @@
 import pytest
 import allure
+from pages.updateprofile_page import UpdateProfilePage
+from config import URL_BAZA
 from playwright.sync_api import expect
 
 @pytest.mark.form
 @pytest.mark.ui
-@allure.title("Test Form Submission")
-@allure.description("Verify user can submit the form (bill payment) successfully.")
+@allure.title("Test Update Profile Submission")
+@allure.description("Verify user can update profile successfully.")
 @allure.severity("normal")
 @allure.epic("Web UI")
 @allure.feature("Form Submission")
-@allure.story("Valid bill payment form submission")
-def test_form_submission(auth_page):
+@allure.story("Valid update profile form submission")
+def test_form_submission(auth_page, update_profile_data):
+    update_profile_page = UpdateProfilePage(auth_page)
+    
     # Navighez către pagina cu formularul
-    auth_page.goto("billpay.htm")
-    expect(auth_page.get_by_role("link", name="Log Out")).to_be_visible(timeout=5000)
+    auth_page.goto(URL_BAZA + "updateprofile.htm")
+    
+    # Verific ca userul este logat
+    expect(auth_page.get_by_role("link", name="Log Out")).to_be_visible()
 
     # Completez câmpurile formularului
-    auth_page.locator("input[name=\"payee.name\"]").fill("John Doe")
-    auth_page.locator("input[name=\"payee.address.street\"]").fill("Str. Scurta 23")
-    auth_page.locator("input[name=\"payee.address.city\"]").fill("Suceava")
-    auth_page.locator("input[name=\"payee.address.state\"]").fill("SV")
-    auth_page.locator("input[name=\"payee.address.zipCode\"]").fill("720229")
-    auth_page.locator("input[name=\"payee.phoneNumber\"]").fill("0745123456")
-    auth_page.locator("input[name=\"payee.accountNumber\"]").fill("123456789")
-    auth_page.locator("input[name=\"verifyAccount\"]").fill("123456789")
-    auth_page.locator("input[name=\"amount\"]").fill("10")
-    auth_page.locator("select[name=\"fromAccountId\"]").select_option("13344")
-
+    update_profile_page.formular_fill(update_profile_data)
+    
     # Trimit formularul
-    auth_page.get_by_role("button", name="Send Payment").click()
+    update_profile_page.click_update_profile()
 
-    expect(auth_page.get_by_text("Bill Payment Complete")).to_be_visible(timeout=5000)
+    # Verific mesajul de confirmare
+    expect(auth_page.get_by_text("Profile Updated")).to_be_visible()
