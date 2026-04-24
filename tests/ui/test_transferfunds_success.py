@@ -12,7 +12,7 @@ from playwright.sync_api import expect
 @allure.severity("critical")
 @allure.epic("Web UI")
 @allure.feature("Account Services")
-@allure.story("Transfer Funds - Successful transaction")
+@allure.story("Transfer Funds")
 def test_form_submission(auth_page, transfer_data_load):
     transfer_funds_page = TransferPage(auth_page)
     

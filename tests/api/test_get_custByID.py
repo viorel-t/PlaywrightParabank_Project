@@ -1,7 +1,3 @@
-#
-# Test pentru endpoint-ul GET /customer details by ID
-#
-
 import pytest
 import allure
 from config import URL_BAZA_API

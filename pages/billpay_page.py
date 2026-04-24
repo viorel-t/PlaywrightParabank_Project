@@ -19,7 +19,8 @@ class BillPayPage:
     def click_send_payment(self):
         self.send_payment_button.click()
 
-    def payment_form_fill(self, date_payment):
+    def payment_form_fill(self, date_payment, amount=None):
+        final_amount = amount if amount is not None else date_payment["amount"]
         self.customer_name.fill(date_payment["name"])
         self.customer_streetaddress.fill(date_payment["address"])
         self.customer_cityaddress.fill(date_payment["city"])
@@ -28,5 +29,5 @@ class BillPayPage:
         self.customer_phone.fill(date_payment["phone"])
         self.customer_account.fill(date_payment["account"])
         self.customer_verify_account.fill(date_payment["verify_account"])
-        self.customer_amount.fill(date_payment["amount"])
+        self.customer_amount.fill(str(final_amount))
         self.customer_from_account.select_option(date_payment["from_account"])
