@@ -1,0 +1,1 @@
+{"uuid": "ea78cca5-55eb-4262-9516-62eb06bb9268", "children": ["b535e3c0-80d4-4a67-bf38-1102f2b5f38e"], "befores": [{"name": "transfer_data_load", "status": "passed", "start": 1777133224253, "stop": 1777133224254}], "start": 1777133224253, "stop": 1777133224690}

@@ -83,6 +83,9 @@ def api_ids_load():
         "negative_id":      -1,
         "zero_id":          0,
         "valid_amount":     10,
+        "transaction_amount":     1000,
+        "transaction_month":     "april",
+        "account_type":     "Debit",
     }
 
 @pytest.fixture

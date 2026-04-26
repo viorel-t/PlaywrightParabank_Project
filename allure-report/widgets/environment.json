@@ -1,1 +1,1 @@
-[]
+[{"values":["Chromium"],"name":"Browser"},{"values":["Local"],"name":"Environment"},{"values":["http://localhost:8080/parabank/"],"name":"Base_URL"},{"values":["http://localhost:8080/parabank/services/bank/"],"name":"Base_URL_API"},{"values":["Windows 10"],"name":"OS"},{"values":["3.13.2"],"name":"Python"},{"values":["9.0.2"],"name":"Pytest"},{"values":["1.57.0"],"name":"Playwright"},{"values":["2.36.0"],"name":"allure-pytest"}]

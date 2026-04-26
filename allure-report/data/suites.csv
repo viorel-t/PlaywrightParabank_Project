@@ -1,8 +1,79 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"Verify user can submit the form successfully.","8991","Test Form Submission","tests.ui","2026-03-13","passed","2026-03-13","","test_form_subm","",""
-"Verify API bill payment.","235","Test Bill Pay API","tests.api","2026-03-13","passed","2026-03-13","","test_post_billPay","",""
-"Verify user can register successfully.","11926","Test Registration","tests.ui","2026-03-13","failed","2026-03-13","","test_registration","",""
-"Verify user can login successfully.","2436","Test Authentication","tests.ui","2026-03-13","passed","2026-03-13","","test_login","",""
-"","13399","test_example[chromium]","tests","2026-01-14","passed","2026-01-14","","test_login","",""
-"Verify API for customer account retrieval.","777","Test Customer Accounts API","tests.api","2026-03-13","passed","2026-03-13","","test_get_custAccounts","",""
-"Verify API for getting Customer Details.","228","Test Customer Details API","tests.api","2026-03-13","passed","2026-03-13","","test_get_custByID","",""
+"Verify that the Bill Pay API handles requests with missing required fields and returns an appropriate error response.","45","Bill Pay API - request with missing required fields","tests.api","2026-04-26","passed","2026-04-26","","test_post_billPay_missing_rf","",""
+"
+Verify that a registered user can successfully log in using valid credentials.
+The test ensures that the user is redirected to the Accounts Overview page
+and that no error message is displayed.
+","470","Login with valid credentials","tests.ui","2026-04-26","passed","2026-04-26","","test_login","",""
+"Verify API bill payment.","48","Test Bill Pay API","tests.api","2026-04-26","passed","2026-04-26","","test_post_billPay","",""
+"
+Verify that the system does not allow bill payment with an amount of 0.
+Expected results:
+- Payment is not processed
+- No success confirmation is displayed
+- Application may display an error or reject the request
+","5372","Bill pay with zero amount","tests.ui","2026-04-26","failed","2026-04-26","","test_billpay_amount_zero","",""
+"
+Verify that login fails when a valid username is used with an incorrect password.
+Expected result: error message is displayed and user remains on login page.
+","318","Login with invalid password","tests.ui","2026-04-26","passed","2026-04-26","","test_login_invalid_password","",""
+"
+Verify that a bill payment can be submitted successfully.
+Expected result: payment is completed and confirmation message is displayed.
+","521","Bill payment with success","tests.ui","2026-04-26","passed","2026-04-26","","test_billpay_success","",""
+"
+Verify that a logged-in user can successfully log out from the application.
+The test ensures that the user is redirected to the login page,
+the session is terminated, and protected pages are no longer accessible.
+","498","Logout functionality","tests.ui","2026-04-26","passed","2026-04-26","","test_logout_success","",""
+"Verify the application behavior when transferring funds to the same account.
+Expected result: the transfer is processed successfully and a confirmation message is displayed,
+EVEN when the SOURCE and DESTINATION account are IDENTICAL.","427","Transfer funds to the same account","tests.ui","2026-04-26","passed","2026-04-26","","test_transferfunds_same_account","",""
+"Verify user can register successfully.","5495","Test Registration","tests.ui","2026-04-26","failed","2026-04-26","","test_registration","",""
+"
+Verify that the system rejects bill payment when a negative amount is entered.
+Expected results:
+- Payment is not processed
+- No success confirmation is displayed
+- Application may display an error or redirect to an error page
+","5382","BillPay with negative amount","tests.ui","2026-04-26","failed","2026-04-26","","test_billpay_amount_negative","",""
+"Verify that a valid funds transfer request between two accounts is processed successfully and returns a successful response.","65","Funds Transfer API - successful transfer between accounts","tests.api","2026-04-26","passed","2026-04-26","","test_post_fundTransfer_success","",""
+"
+Verify that the system validates the amount field and rejects non-numeric input.
+Expected results:
+- Validation error message is displayed
+- Payment is not processed
+- No success confirmation is shown
+","385","BillPay with non-numeric amount","tests.ui","2026-04-26","passed","2026-04-26","","test_billpay_amount_non_numeric","",""
+"Verify that a logged-in user can successfully request a loan using valid input data.","682","Successful loan request","tests.ui","2026-04-26","passed","2026-04-26","","test_loan_request_success","",""
+"Verify that a logged-in user can transfer 
+                    funds between accounts and receives a success confirmation.","413","Transfer funds between accounts successfully","tests.ui","2026-04-26","passed","2026-04-26","","test_transferfunds_success","",""
+"Verify that the Bill Pay API handles requests with missing required fields and returns an appropriate error response.","39","Bill Pay API - request with missing required fields","tests.api","2026-04-26","passed","2026-04-26","","test_post_billPay_missing_rf","",""
+"Verify that the bill payment endpoint rejects requests made without 
+                    authentication. Expected results: - request rejected; - error status returned;
+                    - payment isn't processed","39","Bill payment without authentication","tests.api","2026-04-26","passed","2026-04-26","","test_post_billPay_unauthorized","",""
+"Verify API for customer account retrieval.","47","Test Customer Accounts API","tests.api","2026-04-26","passed","2026-04-26","","test_get_custAccounts","",""
+"Verify that the bill payment endpoint rejects requests made without 
+                    authentication. Expected results: - request rejected; - error status returned;
+                    - payment isn't processed","38","Bill payment without authentication","tests.api","2026-04-26","passed","2026-04-26","","test_post_billPay_unauthorized","",""
+"
+Verify that the system enforces required field validation for the amount field.
+Expected results:
+- Validation message is displayed indicating the field is required
+- Payment is not processed
+- No success confirmation is shown
+","437","BillPay with empty amount field","tests.ui","2026-04-26","passed","2026-04-26","","test_billpay_amount_empty","",""
+"Verify user can update profile successfully.","329","Test Update Profile Submission","tests.ui","2026-04-26","passed","2026-04-26","","test_form_subm","",""
+" Verify that a logged-in user remains authenticated after refreshing the page.
+Expected results: - User stays on an authenticated page after refresh; - Accounts Overview is still 
+                    visible; - Login form is not displayed
+","564","Session persistance after page refresh","tests.ui","2026-04-26","passed","2026-04-26","","test_session_persistance","",""
+"
+Verify that registering fails when an existing username is used for creating a new account.
+Expected result: error message is displayed and user remains on registering page.
+","548","Registering with existing username","tests.ui","2026-04-26","passed","2026-04-26","","test_registration_existing_username","",""
+"Verify that the API returns an error response 
+                    when requesting a customer with an invalid or non-existent ID.","47","Get Customer By Invalid ID - Not Found","tests.api","2026-04-26","passed","2026-04-26","","test_get_custByID_invalid_id","",""
+"Verify that the account transactions endpoint returns a valid XML response
+for a given account ID.","170","Test  Account History API","tests.api","2026-04-26","passed","2026-04-26","","test_get_accountTransactions","",""
+"Verify API for getting Customer Details.","44","Test Customer Details API","tests.api","2026-04-26","passed","2026-04-26","","test_get_custByID","",""

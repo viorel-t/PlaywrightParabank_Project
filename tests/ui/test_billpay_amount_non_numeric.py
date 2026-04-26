@@ -7,15 +7,18 @@ from config import URL_BAZA
 
 @pytest.mark.form
 @pytest.mark.ui
-@allure.title("Bill payment with success")
+@allure.title("BillPay with non-numeric amount")
 @allure.description("""
-Verify that a bill payment can be submitted successfully.
-Expected result: payment is completed and confirmation message is displayed.
+Verify that the system validates the amount field and rejects non-numeric input.
+Expected results:
+- Validation error message is displayed
+- Payment is not processed
+- No success confirmation is shown
 """)
 @allure.severity("normal")
 @allure.epic("Web UI")
 @allure.feature("Payment")
-@allure.story("Bill payment - success")
+@allure.story("BillPay validation")
 def test_form_submission(auth_page, payment_data_load, billpay_amount_load):
     payment_page = BillPayPage(auth_page)
     
