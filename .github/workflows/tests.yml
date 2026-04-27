@@ -1,6 +1,6 @@
 name: Parabank Tests
 
-on:
+"on":
   push:
     branches: [ main ]
   pull_request:
@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      URL_BAZA: http://localhost:8080/parabank/
-      URL_BAZA_API: http://localhost:8080/parabank/services/bank/
+      BASE_URL: http://localhost:8080/parabank/
+      BASE_URL_API: http://localhost:8080/parabank/services/bank/
 
     steps:
       - name: Checkout code
