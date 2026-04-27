@@ -1,0 +1,52 @@
+name: Parabank Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    env:
+      URL_BAZA: http://localhost:8080/parabank/
+      URL_BAZA_API: http://localhost:8080/parabank/services/bank/
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Start Parabank
+        run: docker compose up -d
+
+      - name: Wait for Parabank
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:8080/parabank/index.htm > /dev/null; then
+              echo "Parabank is ready"
+              exit 0
+            fi
+            echo "Waiting for Parabank..."
+            sleep 3
+          done
+          docker compose logs
+          exit 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run tests
+        run: pytest --alluredir=allure-results
+
+      - name: Stop Parabank
+        if: always()
+        run: docker compose down
