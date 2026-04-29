@@ -1,8 +1,12 @@
-#
-# Date pentru formularele din teste
-#
+"""
+# Date pentru formularele si 
+# requesturile din teste
+"""
 
 import pytest
+import xml.etree.ElementTree as ET
+import pytest
+from config import URL_BAZA_API
 
 @pytest.fixture
 def update_profile_data():
@@ -71,21 +75,70 @@ def transfer_data_load():
         "to_account": "12900",
     }
 
-# conftest.py
 
-@pytest.fixture
-def api_ids_load():
+#@pytest.fixture
+#def api_ids_load():
+#    return {
+#        "valid_customer":   12212,
+#        "invalid_customer": 99999,
+#        "valid_account":    13344,
+#        "invalid_account":  99999,
+#        "negative_id":      -1,
+#        "zero_id":          0,
+#        "valid_amount":     10,
+#        "transaction_amount":     1000,
+#        "transaction_month":     "april",
+#        "account_type":     "Debit",
+#   }
+
+@pytest.fixture(scope="session")
+def api_ids_load(playwright):
+    request = playwright.request.new_context()
+
+    username = "john"
+    password = "demo"
+
+    login_response = request.get(
+        f"{URL_BAZA_API}login/{username}/{password}",
+        headers={"Accept": "application/xml"}
+    )
+
+    assert login_response.status == 200
+
+    root = ET.fromstring(login_response.text())
+    customer_id = root.findtext("id")
+
+    assert customer_id is not None
+
+    accounts_response = request.get(
+        f"{URL_BAZA_API}customers/{customer_id}/accounts",
+        headers={"Accept": "application/xml"}
+    )
+
+    assert accounts_response.status == 200
+
+    accounts_root = ET.fromstring(accounts_response.text())
+    accounts = accounts_root.findall("account")
+
+    assert len(accounts) >= 2
+
+    valid_account = accounts[0].findtext("id")
+    to_account = accounts[1].findtext("id")
+
+    request.dispose()
+
     return {
-        "valid_customer":   12212,
+        "valid_customer": customer_id,
         "invalid_customer": 99999,
-        "valid_account":    13344,
-        "invalid_account":  99999,
-        "negative_id":      -1,
-        "zero_id":          0,
-        "valid_amount":     10,
-        "transaction_amount":     1000,
-        "transaction_month":     "april",
-        "account_type":     "Debit",
+        "valid_account": valid_account,
+        "invalid_account": 99999,
+        "negative_id": -1,
+        "zero_id": 0,
+        "valid_amount": 10,
+        "to_account": to_account,
+        "transaction_amount": 1000,
+        "transaction_month": "april",
+        "account_type": "Debit",
     }
 
 @pytest.fixture

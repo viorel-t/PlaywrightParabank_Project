@@ -1,5 +1,5 @@
 services:
   parabank:
-    image: viorel4git/parabank-local
+    image: parasoft/parabank
     ports:
       - "8080:8080"

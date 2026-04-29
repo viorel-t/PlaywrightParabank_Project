@@ -1,1 +1,1 @@
-{"reportName":"Allure Report - Parabank","testRuns":[],"statistic":{"failed":3,"broken":0,"skipped":0,"passed":22,"unknown":0,"total":25},"time":{"start":1777151259152,"stop":1777151284981,"duration":25829,"minDuration":38,"maxDuration":5495,"sumDuration":22423}}
+{"reportName":"Allure Report - Parabank","testRuns":[],"statistic":{"failed":3,"broken":0,"skipped":0,"passed":27,"unknown":0,"total":30},"time":{"start":1777151259152,"stop":1777491899040,"duration":340639888,"minDuration":45,"maxDuration":5770,"sumDuration":27548}}
