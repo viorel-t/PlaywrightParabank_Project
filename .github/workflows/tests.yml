@@ -24,14 +24,20 @@ jobs:
         run: |
           for i in {1..30}; do
             if curl -s http://localhost:8080/parabank/index.htm > /dev/null; then
-              echo "Parabank is ready"
-              exit 0
+              if curl -s -f http://localhost:8080/parabank/services/bank/login/john/demo > /dev/null; then
+                echo "Parabank is ready"
+                exit 0
+              fi
             fi
             echo "Waiting for Parabank..."
             sleep 3
           done
           docker compose logs
           exit 1
+
+      - name: Debug john login
+        run: |
+          curl -i http://localhost:8080/parabank/services/bank/login/john/demo
 
       - name: Setup Python
         uses: actions/setup-python@v5
