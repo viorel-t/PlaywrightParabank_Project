@@ -31,7 +31,7 @@ jobs:
           echo "Waiting for ParaBank DB initialization..."
           for i in $(seq 1 30); do
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/parabank/index.htm)
-            if [ "$STATUS" = "200" ]; then
+            if [ "$STATUS" = "200" ] || [ "$STATUS" = "302" ]; then
               echo "ParaBank is ready (attempt $i)"
               exit 0
             fi
