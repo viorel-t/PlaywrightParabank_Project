@@ -5,8 +5,7 @@
 
 import pytest
 import xml.etree.ElementTree as ET
-import pytest
-from config import URL_BAZA_API
+from config import URL_BAZA, URL_BAZA_API
 
 @pytest.fixture
 def update_profile_data():
@@ -97,6 +96,31 @@ def api_ids_load(playwright):
 
     username = "john"
     password = "demo"
+
+    login = request.get(f"{URL_BAZA_API}login/{username}/{password}")
+    if login.status != 200:
+
+        # Creez user unic
+        #username = f"ci_user_{int(time.time())}"
+        #password = "Test123!"
+
+        register_response = request.post(
+            f"{URL_BAZA}register.htm",
+            form={
+                "customer.firstName": "Test",
+                "customer.lastName": "User",
+                "customer.address.street": "Test Street",
+                "customer.address.city": "Test City",
+                "customer.address.state": "TS",
+                "customer.address.zipCode": "12345",
+                "customer.phoneNumber": "1234567890",
+                "customer.ssn": "123456789",
+                "customer.username": username,
+                "customer.password": password,
+                "repeatedPassword": password,
+            },
+        )
+    assert register_response.status in [200, 302]
 
     login_response = request.get(
         f"{URL_BAZA_API}login/{username}/{password}",
