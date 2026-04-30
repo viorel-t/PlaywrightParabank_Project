@@ -1,6 +1,6 @@
 services:
   parabank:
-    image: viorel4git/parasoft-parabank
+    image: viorel4git/parabank-local:with-db
     ports:
       - "8080:8080"
     healthcheck:
