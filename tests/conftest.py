@@ -95,7 +95,7 @@ def transfer_data_load():
 def api_ids_load(playwright):
     request = playwright.request.new_context()
 
-    username = "john"
+    username = "johnydoe"
     password = "demo"
 
     login = request.get(f"{URL_BAZA_API}login/{username}/{password}",
@@ -118,7 +118,7 @@ def api_ids_load(playwright):
         page.fill("input[name='customer.password']", password)
         page.fill("input[name='repeatedPassword']", password)
 
-        page.click("input[value='Register']")
+        page.get_by_role("button", name="Register").click()
 
         expect(page.locator("h1.title")).to_contain_text(f"Welcome {username}")
         expect(page.get_by_text("Your account was created successfully.")).to_be_visible()
