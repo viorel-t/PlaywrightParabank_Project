@@ -26,19 +26,19 @@ jobs:
       #- name: Start Parabank
       #  run: docker compose up -d
 
-      - name: Wait for Parabank
+      - name: Wait for ParaBank to be ready
         run: |
-          for i in {1..30}; do
-            if curl -s http://localhost:8080/parabank/index.htm > /dev/null; then
-              echo "Parabank is ready"
+          echo "Waiting for ParaBank DB initialization..."
+          for i in $(seq 1 30); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/parabank/index.htm)
+            if [ "$STATUS" = "200" ]; then
+              echo "ParaBank is ready (attempt $i)"
               exit 0
             fi
-            echo "Waiting for Parabank..."
+            echo "Attempt $i: got $STATUS, retrying in 3s..."
             sleep 3
           done
-
-          echo "Parabank did not start"
-          docker compose logs
+          echo "ParaBank never became ready!"
           exit 1
 
       - name: Initialize Parabank database
