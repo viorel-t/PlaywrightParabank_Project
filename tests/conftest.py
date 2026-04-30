@@ -100,24 +100,28 @@ def api_ids_load(playwright):
     login = request.get(f"{URL_BAZA_API}login/{username}/{password}",
                         headers={"Accept": "application/xml"})
     if login.status != 200:
-        register_response = request.post(
-            f"{URL_BAZA}register.htm",
-            form={
-                "customer.firstName": "Test",
-                "customer.lastName": "User",
-                "customer.address.street": "Test Street",
-                "customer.address.city": "Test City",
-                "customer.address.state": "TS",
-                "customer.address.zipCode": "12345",
-                "customer.phoneNumber": "1234567890",
-                "customer.ssn": "123456789",
-                "customer.username": username,
-                "customer.password": password,
-                "repeatedPassword": password,
-            },
-        )
-        print(register_response.text())
-        assert register_response.status in [200, 302]
+        browser = playwright.chromium.launch(headless=True)
+        page = browser.new_page()
+
+        page.goto(f"{URL_BAZA}register.htm")
+
+        page.fill("input[name='customer.firstName']", "Test")
+        page.fill("input[name='customer.lastName']", "User")
+        page.fill("input[name='customer.address.street']", "Test Street")
+        page.fill("input[name='customer.address.city']", "Test City")
+        page.fill("input[name='customer.address.state']", "TS")
+        page.fill("input[name='customer.address.zipCode']", "12345")
+        page.fill("input[name='customer.phoneNumber']", "1234567890")
+        page.fill("input[name='customer.ssn']", "123-45-6789")
+        page.fill("input[name='customer.username']", username)
+        page.fill("input[name='customer.password']", password)
+        page.fill("input[name='repeatedPassword']", password)
+
+        page.click("input[value='Register']")
+
+        page.wait_for_selector("text=Your account was created successfully.")
+
+        browser.close()
 
     login_response = request.get(
         f"{URL_BAZA_API}login/{username}/{password}",
