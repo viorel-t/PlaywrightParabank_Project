@@ -35,6 +35,11 @@ jobs:
           docker compose logs
           exit 1
 
+      - name: Initialize Parabank database
+        run: |
+          curl -s "http://localhost:8080/parabank/admin.htm?action=INIT" > /dev/null
+          sleep 5
+
       - name: Debug john login
         run: |
           curl -i http://localhost:8080/parabank/services/bank/login/john/demo
