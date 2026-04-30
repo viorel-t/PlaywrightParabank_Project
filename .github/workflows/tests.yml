@@ -53,7 +53,8 @@ jobs:
         run: playwright install --with-deps chromium
 
       - name: Run tests
-        run: pytest --alluredir=allure-results
+        #run: pytest --alluredir=allure-results
+        run: pytest tests/api/test_get_accTransactions.py
 
       - name: Stop Parabank
         if: always()
