@@ -3,7 +3,7 @@
 # requesturile din teste
 """
 
-from playwright.async_api import expect
+from playwright.sync_api import expect
 import pytest
 import xml.etree.ElementTree as ET
 from config import URL_BAZA, URL_BAZA_API
@@ -120,9 +120,7 @@ def api_ids_load(playwright):
 
         page.click("input[value='Register']")
 
-        #page.wait_for_selector("text=Your account was created successfully.")
-        #expect(page.locator("h1.title")).to_contain_text(f"Welcome {username}")
-        expect(page.get_by_role("heading", name="Welcome " + username)).to_be_visible()
+        expect(page.locator("h1.title")).to_contain_text(f"Welcome {username}")
         expect(page.get_by_text("Your account was created successfully.")).to_be_visible()
 
         browser.close()
@@ -132,13 +130,16 @@ def api_ids_load(playwright):
         headers={"Accept": "application/xml"}
     )
 
+    # verific daca am login reusit
     assert login_response.status == 200
-
+    
+    ## obtin id-ul userului logat
     root = ET.fromstring(login_response.text())
     customer_id = root.findtext("id")
 
     assert customer_id is not None
 
+    # obtin primul cont al userului
     accounts_response = request.get(
         f"{URL_BAZA_API}customers/{customer_id}/accounts",
         headers={"Accept": "application/xml"}
@@ -149,10 +150,31 @@ def api_ids_load(playwright):
     accounts_root = ET.fromstring(accounts_response.text())
     accounts = accounts_root.findall("account")
 
-    assert len(accounts) >= 2
+    assert len(accounts) >= 1
 
     valid_account = accounts[0].findtext("id")
-    to_account = accounts[1].findtext("id")
+    #to_account = accounts[1].findtext("id")
+
+   # creez al doilea cont
+    second_account_response = request.post(
+        f"{URL_BAZA_API}createAccount",
+        params={
+            "customerId": customer_id,
+            "newAccountType": 0,      # 0 = CHECKING, 1 = SAVINGS
+            "fromAccountId": valid_account
+        },
+        headers={"Accept": "application/xml"}
+    )
+
+    assert second_account_response.status == 200
+
+    # obtin id-ul celui de-al doilea cont
+    root = ET.fromstring(second_account_response.text())
+    to_account = root.findtext("id")
+    
+    # verific daca al doilea cont este nevid si numeric
+    assert to_account is not None
+    assert to_account.isdigit()
 
     request.dispose()
 
