@@ -100,11 +100,6 @@ def api_ids_load(playwright):
     login = request.get(f"{URL_BAZA_API}login/{username}/{password}",
                         headers={"Accept": "application/xml"})
     if login.status != 200:
-
-        # Creez user unic
-        #username = f"ci_user_{int(time.time())}"
-        #password = "Test123!"
-
         register_response = request.post(
             f"{URL_BAZA}register.htm",
             form={
