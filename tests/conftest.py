@@ -97,7 +97,8 @@ def api_ids_load(playwright):
     username = "john"
     password = "demo"
 
-    login = request.get(f"{URL_BAZA_API}login/{username}/{password}")
+    login = request.get(f"{URL_BAZA_API}login/{username}/{password}",
+                        headers={"Accept": "application/xml"})
     if login.status != 200:
 
         # Creez user unic
@@ -120,7 +121,7 @@ def api_ids_load(playwright):
                 "repeatedPassword": password,
             },
         )
-    assert register_response.status in [200, 302]
+        assert register_response.status in [200, 302]
 
     login_response = request.get(
         f"{URL_BAZA_API}login/{username}/{password}",
