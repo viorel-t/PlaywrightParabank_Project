@@ -121,7 +121,7 @@ def api_ids_load(playwright):
         page.click("input[value='Register']")
 
         #page.wait_for_selector("text=Your account was created successfully.")
-        expect(page.get_by_role("heading", name=f"Welcome {username}")).to_be_visible()
+        expect(page.locator("h1.title")).to_contain_text(f"Welcome {username}")
         expect(page.get_by_text("Your account was created successfully.")).to_be_visible()
 
         browser.close()
