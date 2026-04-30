@@ -116,6 +116,7 @@ def api_ids_load(playwright):
                 "repeatedPassword": password,
             },
         )
+        print(register_response.text())
         assert register_response.status in [200, 302]
 
     login_response = request.get(
