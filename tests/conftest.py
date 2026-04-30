@@ -95,10 +95,10 @@ def transfer_data_load():
 def api_ids_load(playwright):
     request = playwright.request.new_context()
 
-    #username = "johnydoe"
-    #password = "demo"
-    username = f"ci_user_{int(time.time())}"
-    password = "Test123!"
+    username = "john"
+    password = "demo"
+    #username = f"ci_user_{int(time.time())}"
+    #password = "Test123!"
 
     login = request.get(f"{URL_BAZA_API}login/{username}/{password}",
                         headers={"Accept": "application/xml"})
