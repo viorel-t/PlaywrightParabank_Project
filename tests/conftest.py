@@ -3,6 +3,7 @@
 # requesturile din teste
 """
 
+from playwright.async_api import expect
 import pytest
 import xml.etree.ElementTree as ET
 from config import URL_BAZA, URL_BAZA_API
@@ -119,7 +120,9 @@ def api_ids_load(playwright):
 
         page.click("input[value='Register']")
 
-        page.wait_for_selector("text=Your account was created successfully.")
+        #page.wait_for_selector("text=Your account was created successfully.")
+        expect(page.get_by_role("heading", name=f"Welcome {username}")).to_be_visible()
+        expect(page.get_by_text("Your account was created successfully.")).to_be_visible()
 
         browser.close()
 
