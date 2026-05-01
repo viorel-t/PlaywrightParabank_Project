@@ -65,8 +65,8 @@ jobs:
           curl -i http://localhost:8080/parabank/register.htm
 
       - name: Run tests
-        #run: pytest --alluredir=allure-results
-        run: pytest tests/api/test_get_accTransactions.py || (docker compose logs parabank && exit 1)
+        run: pytest --alluredir=allure-results
+        #run: pytest tests/api/test_get_accTransactions.py || (docker compose logs parabank && exit 1)
 
       - name: Stop Parabank
         if: always()
