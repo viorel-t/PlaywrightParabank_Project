@@ -76,21 +76,22 @@ def transfer_data_load():
     }
 
 
-#@pytest.fixture
-#def api_ids_load():
-#    return {
-#        "valid_customer":   12212,
-#        "invalid_customer": 99999,
-#        "valid_account":    13344,
-#        "invalid_account":  99999,
-#        "negative_id":      -1,
-#        "zero_id":          0,
-#        "valid_amount":     10,
-#        "transaction_amount":     1000,
-#        "transaction_month":     "april",
-#        "account_type":     "Debit",
-#   }
+@pytest.fixture
+def api_ids_load():
+    return {
+        "valid_customer":   12212,
+        "invalid_customer": 99999,
+        "valid_account":    13344,
+        "invalid_account":  99999,
+        "negative_id":      -1,
+        "zero_id":          0,
+        "valid_amount":     10,
+        "transaction_amount":     1000,
+        "transaction_month":     "april",
+        "account_type":     "Debit",
+   }
 
+''''
 @pytest.fixture(scope="session")
 def api_ids_load(playwright):
     request = playwright.request.new_context()
@@ -197,7 +198,8 @@ def api_ids_load(playwright):
         "transaction_month": "april",
         "account_type": "Debit",
     }
-
+'''
+    
 @pytest.fixture
 def api_billpay_data_load():
     return {

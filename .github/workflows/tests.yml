@@ -23,9 +23,6 @@ jobs:
           docker compose pull
           docker compose up -d --force-recreate --wait
 
-      #- name: Start Parabank
-      #  run: docker compose up -d
-
       - name: Wait for ParaBank to be ready
         run: |
           echo "Waiting for ParaBank DB initialization..."
