@@ -80,6 +80,7 @@ def transfer_data_load():
 def api_ids_load():
     return {
         "valid_customer":   12212,
+        "valid_username":   "john",
         "invalid_customer": 99999,
         "valid_account":    13344,
         "invalid_account":  99999,
@@ -89,6 +90,7 @@ def api_ids_load():
         "transaction_amount":     1000,
         "transaction_month":     "april",
         "account_type":     "Debit",
+        "account_type_id":     0,   # 0 = CHECKING, 1 = SAVINGS
    }
 
 ''''
