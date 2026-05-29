@@ -16,8 +16,3 @@ class TransferPage:
         self.transfer_from_account.select_option(value=transfer_date["from_account"])
         self.transfer_to_account.select_option(value=transfer_date["to_account"])
         self.transfer_amount.fill(transfer_date["amount"])
-
-    
-#    def verify_payment_error(self):
-#        expect(self.page.get_by_role("heading", name="Error!")).to_be_visible()
-#        expect(self.page.locator("#rightPanel")).to_contain_text("error has occurred")
