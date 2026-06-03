@@ -6,7 +6,8 @@ from datetime import datetime
 
 @pytest.mark.api
 @allure.title("Account transactions filtered by month and account type")
-@allure.description("""Verify that the API correctly returns transactions filtered by a specific month for a given type account.
+@allure.description("""Verify that the API correctly returns transactions 
+                    filtered by a specific month for a given type account.
 
 Expected results:
 - Response status is 200 (OK)

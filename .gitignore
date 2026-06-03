@@ -1,3 +1,6 @@
 my_allure_dir/
 __pycache__/
 __init__/
+allure-results/
+allure-report/
+screenshots/
