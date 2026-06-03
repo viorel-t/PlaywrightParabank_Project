@@ -38,4 +38,7 @@ def test_form_submission(auth_page, transaction_data_load):
     expect(auth_page.locator("#transactionTable")).to_be_visible()
     tabel_text = auth_page.locator("#transactionTable").text_content()
     assert tabel_text is not None
+    #print("Tabel text:", tabel_text)
+    #print("Cont:", transaction_data_load["from_account"])
+    #print("Data cautata:", transaction_data_load["toDate"])
     assert transaction_data_load["toDate"][:3] in tabel_text

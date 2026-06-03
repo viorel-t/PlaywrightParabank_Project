@@ -2,11 +2,11 @@
 # Date pentru formularele si 
 # requesturile din teste
 """
-import time
-from playwright.sync_api import expect
+#import time
+#from playwright.sync_api import expect
 import pytest
-import xml.etree.ElementTree as ET
-from config import URL_BAZA, URL_BAZA_API
+#import xml.etree.ElementTree as ET
+#from config import URL_BAZA, URL_BAZA_API
 
 @pytest.fixture
 def update_profile_data():
@@ -198,7 +198,7 @@ def payment_data_load():
 def transaction_data_load():
     return {
         "fromDate": "04-01-2026", # MM-DD-YYYY
-        "toDate": "05-24-2026",   # MM-DD-YYYY
+        "toDate": "05-30-2026",   # MM-DD-YYYY (05-30-2026)
         "amount": "10",
         "from_account": "13344",
     }
